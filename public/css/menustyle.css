@@ -1,0 +1,63 @@
+/* 
+body {
+	behavior: url(csshover.htc);
+}*/
+ 
+ 
+.vmenu a {
+	color: #000;
+	text-decoration: none;
+}
+
+.vmenu{
+	list-style: none;
+	/*margin: 0;
+	padding: 0;*/
+	float:left;
+	width:120px;
+}
+
+.vmenu li {
+	font-family:'Microsoft YaHei',sans-serif;
+	font-size:1.1em;
+	padding-bottom:5px;
+	padding-top:10px;
+	height:100%;
+	/*background:#ff8b8e;*/
+	/*border-bottom:1px solid #c00000;*/
+	position: relative;
+	float:left;
+	width:100%;
+	}
+/*	
+.vmenu li .vmenu li{
+	background:#ffcf8b;
+	}
+*/
+.vmenu li a{
+	display:block;
+	padding: 2px 3px;
+	/*border-left:3px solid transparent;*/
+}
+
+.vmenu li a:hover {
+	color: #c00000;
+	/*background: #c00000;
+	border-right:1px solid #fff;
+	border-left:1px solid #fff;*/
+}
+
+.vmenu li ul li a:hover{
+	/*background: #c00000;*/
+	
+}
+
+.vmenu ul {
+	position: absolute;
+	top: 0;
+	display:none;
+}
+.vmenu li:hover ul{
+	display: block;
+	left:120px;
+}
