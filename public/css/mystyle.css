@@ -36,9 +36,9 @@
 }
 
 .smallRedball, .smallBlueball {
-	font: 12px/1.5 arial,宋体;
+	  font: 12px/1.5 arial,宋体;
     display: inline-block;
-    width: 19px;
+    width: 22px;
     padding-right: 1px;
     height: 22px;
     line-height: 21px;
