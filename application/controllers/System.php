@@ -21,6 +21,85 @@ Class System extends Secure_area{
 		$this->load->view('includes/template',$data);
 	}
 	
+	function analysis()
+	{
+		$data['main_containt'] = 'system/analysis';
+		$data['error'] = '';
+		$this->load->view('includes/template',$data);
+	}
+
+	function import()
+	{
+		$data['main_containt'] = 'system/import';
+		$this->load->view('includes/template',$data);
+	}
+
+	function do_upload()
+	{
+		$config['upload_path'] = './uploads/alipay';
+		$config['allowed_types'] = 'txt';//'*';//'gif|jpg|png';
+		//$config['max_size']	= '100';
+		//$config['max_width']  = '1024';
+		//$config['max_height']  = '768';
+
+		$this->load->library('upload', $config);
+		$data['main_containt'] = 'system/analysis';
+
+		if ( ! $this->upload->do_upload())
+		{
+			$data['error'] = $this->upload->display_errors();
+			$this->load->view('includes/template',$data);
+		}
+		else
+		{
+			$data['error'] = '';
+			$this->load->view('includes/template',$data);
+		}
+	}
+
+	function do_upload_order()
+	{
+		$config['upload_path'] = './uploads/alipay';
+		$config['allowed_types'] = 'txt';//'*';//'gif|jpg|png';
+		//$config['max_size']	= '100';
+		//$config['max_width']  = '1024';
+		//$config['max_height']  = '768';
+
+		$this->load->library('upload', $config);
+		$data['main_containt'] = 'system/import';
+		
+		if ( ! $this->upload->do_upload())
+		{
+			$data['error'] = $this->upload->display_errors();
+			$this->load->view('includes/template',$data);
+		}
+		else
+		{
+			$data['error'] = '';
+			$upload_data = $this->upload->data(); 
+  			$data['filename'] =  $upload_data['file_name'];
+			$this->load->view('includes/template',$data);
+		}
+	}
+
+	function socket($filename)
+	{
+		$address = '127.0.0.1';
+		$port = 9900;
+		$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+		$result = socket_connect($socket, $address, $port);
+
+		$in = "ALIORDER,".$filename."\r\n";
+
+		socket_write($socket, $in, strlen($in));
+
+		$data['error'] = socket_read($socket,1024,PHP_NORMAL_READ);
+		socket_close($socket);
+
+		$data['main_containt'] = 'system/import';
+		$this->load->view('includes/template',$data);
+	}
+
 	function employee()
 	{
 		$this->db->from('employee');
