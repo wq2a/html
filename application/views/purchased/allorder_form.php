@@ -35,7 +35,7 @@
 								<img src="'.$subitem->image.'" width="80" height="80" style="position:relative;float:left;border:1px solid #999999;margin-right:5px;">
 							</a>
 							<div id="ordertitlelist" style="font-size:13px;">'
-								.$subitem->name.'<br/><span style="color:#c00000;">￥'.(($subitem->cost)/100).'/￥'.(2.4*($subitem->cost)/100).'</span>  数量：'.$subitem->quantity.
+								.$subitem->name.'<br/><span>￥'.(($subitem->cost)/100).'/￥'.(2.4*($subitem->cost)/100).'</span>  数量：'.$subitem->quantity.
 							'</div></div>';
 			}
 			echo '</tr>';

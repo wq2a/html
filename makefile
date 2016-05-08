@@ -1,6 +1,8 @@
 all:	tmp
 tmp:	system/tmp
 	sudo chmod 777 system/tmp
+	sudo chmod 777 uploads
+	sudo chmod 777 uploads/alipay
 
 generate:
 	python private/python/alipay/alipay_plt.py

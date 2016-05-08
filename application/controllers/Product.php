@@ -139,7 +139,7 @@
 		if($item_name!=''&&$item_name!='null'){
 			$this->db->like('name',$item_name);
 		}
-		//$this->db->order_by("item_id", "desc");
+		$this->db->order_by("item_id", "desc");
 		$data['records'] = $this->db->get('items', $config['per_page'], $this->uri->segment(5));
 		
 		$data['main_containt'] = 'product/items';
@@ -161,6 +161,33 @@
 			echo $this->cart->total_items();
 		}
 	}
+
+/*	function itemedit()
+	{
+		if($this->input->post('ajax')=='1')
+		{
+			$success=false;
+			$pieces = explode("_", $this->input->post('name'));
+			if($pieces[0]=='price')
+			{
+				$update_data = array(
+					'price' => $this->input->post('value')
+				);
+				$this->db->where('item_id',$pieces[1]);
+				$success = $this->db->update('items',$update_data);
+			}
+			if($success)
+			{
+				echo '成功';
+			}
+		}
+	}
+*/
+
+
+
+
+
 }
 
 ?>

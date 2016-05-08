@@ -27,10 +27,17 @@
 			</div>
 			<p style="margin-bottom:2px;">'
 			.$item->name.
-			'</p><p style="margin:0px;"><span class="glyphicon glyphicon-yen">'.(($item->cost)/100).
-			'<span >/<span class="glyphicon glyphicon-yen">'.(2.4*($item->cost)/100).
+			'</p><p style="margin:0px;"><span class="glyphicon glyphicon-yen">'.(($item->cost)/100).'/</span>';
+
+			if($item->price == 0){
+				echo '<span class="glyphicon glyphicon-yen">'.(2.4*($item->cost)/100).'</span>';
+			}else{
+				echo '<span class="glyphicon glyphicon-yen" style="color:#c00000;">'.(($item->price)).'</span>';
+			}
 			
-			'</span><span class="text-default">  数量:'.$item->quantity.$item->unit.
+			
+
+			echo '<span class="text-default">  数量:'.$item->quantity.$item->unit.
 			'</span></p>
 			
 			<div class="input-group" style="margin-bottom:5px;"><span class="input-group-addon">缺:</span>

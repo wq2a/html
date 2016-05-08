@@ -19,8 +19,8 @@ function index()
 	$this->load->view('includes/template',$data);
 	*/
 	$DB1 = $this->load->database('lottery', TRUE);
-	$this->db->order_by("kj_id", "desc");
-	$this->db->limit(5);
+	$DB1->order_by("kj_id", "desc");
+	$DB1->limit(1);
 	$data['kj'] = $DB1->get('kj');
 
 	$data['main_containt'] = 'home/homepagev2';
