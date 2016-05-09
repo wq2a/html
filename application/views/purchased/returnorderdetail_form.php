@@ -6,15 +6,53 @@
 			if($indextemp==0)
 			{
 				//echo '<button type="button" class="btn btn-success" onclick="jump('."'".base_url().'index.php/purchased/orderconfirm/'.$item->order_id."'".')" >确认收货（不缺货）</button>'.
-				echo '<div><h3>'.$item->supplier.'</h3><p>订单号:'.$item->order_id.' 日期:'
+				echo '<div ><h3>'.$item->supplier.'</h3><p>订单号:'.$item->order_id.' 日期:'
 				.substr($item->createtime,0,4).'年'.substr($item->createtime,4,2).'月'.substr($item->createtime,6,2).'日</p></div><hr style="margin-bottom:5px;">';
 
 				echo '<div class="row" style="margin-bottom:8px;"><button type="button" class="btn btn-success col-md-offset-10" 
 				data-toggle="modal" data-target="#myModal" data-submit="try_'
-	.$order_id.'" onclick="submit(this)">下一步<span class="glyphicon glyphicon-chevron-right"></span></button></div>';
+	.$order_id.'" onclick="submit(this)">下一步<span class="glyphicon glyphicon-chevron-right"></span></button></div><hr class="featurette-divider">';
 
 			}
 
+			//if($indextemp%2 == 0){
+				echo '<div class="row" style="margin-bottom:8px;">';
+			//}
+			$indextemp++;
+			echo '<div class="col-sm-2 col-md-2">
+					<div class="carousel-inner">
+					<img src="'.$item->image.'" class="img-thumbnail" style="border: 0 none;box-shadow: none;"/>
+					<h3 class="carousel-caption text-info" >#'.$indextemp.'</h3>
+				
+				
+
+
+				</div></div>';
+
+			echo '<div class="col-sm-6 col-md-6">
+				<p>'.$item->name.'</p><p><span class="glyphicon glyphicon-yen">'.(($item->cost)/100).'</span>/'.
+					(($item->price == 0)?'<span class="glyphicon glyphicon-yen">'.(2.4*($item->cost)/100).'</span>'
+					:'<span class="glyphicon glyphicon-yen" style="color:#c00000;">'.($item->price).'</span>').
+				'<span class="text-danger" style="margin-left:8px;">数量: '.$item->quantity.$item->unit.'</span></p>
+				</div>
+				<div class="col-sm-4 col-md-4">
+				<p class="input-group"><span id="sizing-addon3" class="input-group-addon">#'.$indextemp.' 缺:</span>
+				<input aria-describedby="sizing-addon3" class="edit form-control" id="lack_'.$item->item_index.'" type="number" data-edit="lack_'.$item->item_index.'" value="'.$item->lack_quantity.'" onchange="input_change(this)" 
+					style="'.($item->lack_quantity>0?'background:#c00000;color:#ffffff;':'background:#ffffff;color:#000000;').'"><span id="sizing-addon3" class="input-group-btn">
+        	<button class="btn btn-default" id="'.$item->item_index.'" type="button" onclick="checker(this)">不缺</button>
+				</p>
+				
+				<p class="input-group"><span id="sizing-addon3" class="input-group-addon">#'.$indextemp.' 破:</span>
+				<input aria-describedby="sizing-addon3" class="edit form-control" type="number" data-edit="broken_'.$item->item_index.'" value="'.$item->broken_quantity.'" onchange="input_change(this)" 
+					style="'.($item->broken_quantity>0?'background:#c00000;color:#ffffff;':'background:#ffffff;color:#000000;').'">
+				</p>
+			</div>';
+
+			//if($indextemp%2 == 0){
+				echo '</div>';
+
+			//}
+			
 /*
 			echo '<div class="media">
   				<div class="media-left">
@@ -26,6 +64,8 @@
   				</div>
 				</div>';
 */
+
+/*
 			if($indextemp%3 == 0){
 				echo '<div class="row">';
 			}
@@ -37,6 +77,7 @@
 			<img src="'.$item->image.'" class="img-thumbnail" style="border: 0 none;box-shadow: none;"/>
 			<h1 class="carousel-caption text-info" style="color:#000000;">#'.$indextemp.'</h1>
 			</div>
+
 			<p style="margin-bottom:2px;">'
 			.$item->name.
 			'</p><p style="margin:0px;"><span class="glyphicon glyphicon-yen">'.(($item->cost)/100).'/</span>';
@@ -65,6 +106,8 @@
 			if($indextemp%3 == 0){
 				echo '</div>';
 			}
+
+*/
 		}
 ?>
 
