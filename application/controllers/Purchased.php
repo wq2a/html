@@ -25,7 +25,7 @@
 	{
 		$this->load->library('pagination');
 
-		$config['base_url'] = base_url().'/index.php/purchased/searchbysupplier';
+		$config['base_url'] = base_url().'index.php/purchased/searchbysupplier';
 		$config['total_rows'] = $this->db->get('supplier')->num_rows();
 		$config['per_page'] = 10;
 		$config['num_links'] = 20;
@@ -43,7 +43,7 @@
 	{
 		$this->load->library('pagination');
 
-		$config['base_url'] = base_url().'/index.php/Purchased/searchbysupplierlist/'.$supplier;
+		$config['base_url'] = base_url().'index.php/Purchased/searchbysupplierlist/'.$supplier;
 		$this->db->where('supplier',$supplier);
 		$config['total_rows'] = $this->db->get('purchase_order')->num_rows();
 		$config['per_page'] = 10;
@@ -96,7 +96,7 @@
 	{
 		$this->load->library('pagination');
 
-		$config['base_url'] = base_url().'/index.php/Purchased/allorder';
+		$config['base_url'] = base_url().'index.php/Purchased/allorder';
 		$config['total_rows'] = $this->db->get('purchase_order')->num_rows();
 		$config['per_page'] = 10;
 		$config['num_links'] = 8;
@@ -133,7 +133,7 @@
 	{
 		$this->load->library('pagination');
 
-		$config['base_url'] = base_url().'/index.php/Purchased/myorder';
+		$config['base_url'] = base_url().'index.php/Purchased/myorder';
 		$this->db->where('deleted',0);
 		$num = $this->db->count_all_results('myorder');
 		$config['total_rows'] = $num;//$this->db->get('myorder')->num_rows();
@@ -184,7 +184,7 @@
 	{
 		$this->load->library('pagination');
 
-		$config['base_url'] = base_url().'/index.php/Purchased/returnorder';
+		$config['base_url'] = base_url().'index.php/Purchased/returnorder';
 		$config['total_rows'] = $this->db->get('purchase_order')->num_rows();
 		$config['per_page'] = 10;
 		$config['num_links'] = 20;
@@ -229,7 +229,7 @@
 	{
 		$this->load->library('pagination');
 
-		$config['base_url'] = base_url().'/index.php/purchased/allreturn';
+		$config['base_url'] = base_url().'index.php/purchased/allreturn';
 		$this->db->where('is_return',1);
 		$config['total_rows'] = $this->db->get('purchase_order')->num_rows();
 		$config['per_page'] = 10;
@@ -283,7 +283,7 @@
 		
 		$this->load->library('pagination');
 
-		$config['base_url'] = base_url().'/index.php/purchaseorder/search/'.$order_id.'/'.$supplier.'/'.$item_name;
+		$config['base_url'] = base_url().'index.php/purchaseorder/search/'.$order_id.'/'.$supplier.'/'.$item_name;
 		$config['total_rows'] = $this->db->get('purchase_order_items')->num_rows();
 		$config['per_page'] = 10;
 		$config['num_links'] = 20;
@@ -394,7 +394,7 @@
 					$comment = $comment.'<br><a name="loginButton" class="btn btn-default" disabled>确 认</a></br>';
 				
 				}else{
-					$comment = $comment.'<br><a name="loginButton" class="btn btn-danger" href="'.base_url().'/index.php/purchased/returnconfirm/'.$pieces[1].'" >确 认</a></br>';
+					$comment = $comment.'<br><a name="loginButton" class="btn btn-danger" href="'.base_url().'index.php/purchased/returnconfirm/'.$pieces[1].'" >确 认</a></br>';
 				
 				}
 				
@@ -439,7 +439,7 @@
 	{
 		$this->load->library('pagination');
 
-		$config['base_url'] = base_url().'/index.php/purchased/purchaseitems';
+		$config['base_url'] = base_url().'index.php/purchased/purchaseitems';
 		$config['total_rows'] = $this->db->get('items')->num_rows();
 		$config['per_page'] = 30;
 		$config['num_links'] = 8;
@@ -476,7 +476,7 @@
 	{
 		$this->load->library('pagination');
 
-		$config['base_url'] = base_url().'/index.php/purchased/needpurchaseitems';
+		$config['base_url'] = base_url().'index.php/purchased/needpurchaseitems';
 		$this->db->where('buy_quantity>',0);
 		$config['total_rows'] = $this->db->get('items')->num_rows();
 		$config['per_page'] = 50;
@@ -499,7 +499,7 @@
 		
 		$name = urldecode($item_name);
 
-		$config['base_url'] = base_url().'/index.php/purchased/searchitems/'.$name;
+		$config['base_url'] = base_url().'index.php/purchased/searchitems/'.$name;
 		$this->db->like('name',$name);
 		$config['total_rows'] = $this->db->get('items')->num_rows();
 		
@@ -542,7 +542,7 @@
 		$item_name = urldecode($item_name);
 		$item_supplier = urldecode($item_supplier);
 
-		$config['base_url'] = base_url().'/index.php/purchased/searchitems2/'.$item_supplier.'/'.$item_name;
+		$config['base_url'] = base_url().'index.php/purchased/searchitems2/'.$item_supplier.'/'.$item_name;
 		if($item_supplier!=''&&$item_supplier!='null'){
 			$this->db->like('supplier',$item_supplier);
 		}
@@ -595,7 +595,7 @@
 
 		$order_supplier = urldecode($order_supplier);
 
-		$config['base_url'] = base_url().'/index.php/Purchased/searchorder/'.$order_id.'/'.$order_supplier;
+		$config['base_url'] = base_url().'index.php/Purchased/searchorder/'.$order_id.'/'.$order_supplier;
 		if($order_id!='null'&&$order_id!='')
 		{
 			$this->db->like('order_id',$order_id);
