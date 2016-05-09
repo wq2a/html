@@ -81,7 +81,7 @@ function input_change(id)
 		value:id.value
 		};
 		$.ajax({
-		url:'<?php echo base_url() ?>/index.php/system/itemedit',
+		url:'<?php echo base_url() ?>index.php/system/itemedit',
 		type:'POST',
 		data:form_data,
 		success:function(msg){

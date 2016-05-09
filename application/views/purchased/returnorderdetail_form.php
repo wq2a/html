@@ -12,8 +12,20 @@
 				echo '<div class="row" style="margin-bottom:8px;"><button type="button" class="btn btn-success col-md-offset-10" 
 				data-toggle="modal" data-target="#myModal" data-submit="try_'
 	.$order_id.'" onclick="submit(this)">下一步<span class="glyphicon glyphicon-chevron-right"></span></button></div>';
+
 			}
 
+/*
+			echo '<div class="media">
+  				<div class="media-left">
+    			<img class="media-object" src="'.$item->image.'" alt="..." style="width:64px;height:64px;">
+  				</div>
+  				<div class="media-body">
+    			<h4 class="media-heading">Media heading</h4>
+    			...
+  				</div>
+				</div>';
+*/
 			if($indextemp%3 == 0){
 				echo '<div class="row">';
 			}
@@ -44,7 +56,7 @@
 			<input class="edit form-control" id="lack_'.$item->item_index.'" type="number" data-edit="lack_'.$item->item_index.'" value="'.$item->lack_quantity.'" onchange="input_change(this)" 
 			style="'.($item->lack_quantity>0?'background:#c00000;color:#ffffff;':'background:#ffffff;color:#000000;').'"></input><span class="input-group-addon">'.$item->unit.'</span><span class="input-group-btn">
         	<button class="btn btn-default" id="'.$item->item_index.'" type="button" onclick="checker(this)">不缺</button>
-      </span></div>
+      		</span></div>
 			
 			<div class="input-group"><span class="input-group-addon">破:</span>
 			<input class="edit form-control" type="number" data-edit="broken_'.$item->item_index.'" value="'.$item->broken_quantity.'" onchange="input_change(this)" 

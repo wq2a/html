@@ -7,6 +7,10 @@ tmp:	system/tmp
 generate:
 	python private/python/alipay/alipay_plt.py
 
+ios:
+	# xcrun instruments -w B63AA68B-3912-43FC-B644-7E2CEBFF038D
+	xcrun simctl list
+
 input:
 	mv uploads/alipay/* private/python/alipay/data
 	python3 private/python/alipay/a.py private/python/alipay/data/*.txt
@@ -21,4 +25,4 @@ initdb:
 	mysql -u root -p alipay < private/python/db/alipay_by_date.sql
 	rm -r private/python/db
 
-.PHONY:  tmp generate input initdb
+.PHONY:  tmp generate ios input initdb

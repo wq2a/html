@@ -202,7 +202,7 @@
 	// 破损退货订单详细页
 	function returnorderdetail($order_id)
 	{
-		$this->db->select('*, purchase_order_items.image as image, purchase_order_items.cost as cost ');
+		$this->db->select('*, purchase_order_items.image as image, purchase_order_items.cost as cost, purchase_order_items.quantity as quantity ');
 		$this->db->where('order_id',$order_id);
 		$this->db->join('items', 'purchase_order_items.name = items.name');
 		
