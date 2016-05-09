@@ -1,6 +1,11 @@
 <?php 	$this->load->view('purchased/home');
 		$indextemp=0;
 		
+		$name = '';
+		$image = '';
+		$cost = '';
+		$total = 0;
+		$quantity = 0;
 		foreach($query->result() as $item)
 		{
 			if($indextemp==0)
@@ -15,9 +20,18 @@
 
 			}
 
-			//if($indextemp%2 == 0){
-				echo '<div class="row" style="margin-bottom:8px;">';
-			//}
+			if($name == $item->name && $cost ==$item->cost
+			 && substr($image, strrpos($image, '/') + 1) == substr($item->image, strrpos($item->image, '/') + 1)){
+				$total += $quantity;
+				echo '<span class="badge" style="background-color: #333333;">+'.$item->quantity.'</span>';
+			}else{
+				if($total != 0){
+					$total += $quantity;
+					echo '<span class="badge" style="background-color: #398439;">总数: '.$total.'</span><hr class="featurette-divider" style="border-color:#398439;">';
+					$total = 0;
+				}
+
+			echo '<div class="row" style="margin-bottom:8px;">';
 			$indextemp++;
 			echo '<div class="col-sm-2 col-md-2">
 					<div class="carousel-inner">
@@ -49,7 +63,12 @@
 			</div>';
 
 			//if($indextemp%2 == 0){
-				echo '</div>';
+			echo '</div>';
+			}
+			$name = $item->name;
+			$image = $item->image;
+			$cost = $item->cost;
+			$quantity = $item->quantity;
 
 			//}
 			
@@ -109,6 +128,12 @@
 
 */
 		}
+
+		if($total != 0){
+					$total += $quantity;
+					echo '<span class="badge" style="background-color: #398439;">总数: '.$total.'</span><hr class="featurette-divider">';
+					$total = 0;
+				}
 ?>
 
 
