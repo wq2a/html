@@ -1,6 +1,9 @@
 <?php 	$this->load->view('purchased/home');
 		$indextemp=0;
 		
+		$analysis0 = 0;
+		$analysis1 = 0;
+
 		$name = '';
 		$image = '';
 		$cost = '';
@@ -24,27 +27,36 @@
 			 && substr($image, strrpos($image, '/') + 1) == substr($item->image, strrpos($item->image, '/') + 1)){
 				$total += $quantity;
 				echo '<span class="badge" style="background-color: #333333;">+'.$item->quantity.'</span>';
-			}else{
+			}
+			/*
+			else if($name == $item->name && $cost ==$item->cost){
+				$total += $quantity;
+				
+				
+				echo '<div class="col-sm-2 col-md-2">
+					<div class="carousel-inner">
+					<img src="'.$item->image.'" class="img-thumbnail" style="border: 0 none;box-shadow: none;"/>
+					</div></div>';
+				
+			}*/
+			else{
 				if($total != 0){
 					$total += $quantity;
 					echo '<span class="badge" style="background-color: #398439;">总数: '.$total.'</span><hr class="featurette-divider" style="border-color:#398439;">';
 					$total = 0;
 				}
-
-			echo '<div class="row" style="margin-bottom:8px;">';
-			$indextemp++;
-			echo '<div class="col-sm-2 col-md-2">
+				
+				echo '<div class="row" style="margin-bottom:8px;">';
+		
+				$indextemp++;
+				echo '<div class="col-sm-2 col-md-2">
 					<div class="carousel-inner">
 					<img src="'.$item->image.'" class="img-thumbnail" style="border: 0 none;box-shadow: none;"/>
 					<h3 class="carousel-caption text-info" >#'.$indextemp.'</h3>
-				
-				
+					</div></div>';
 
-
-				</div></div>';
-
-			echo '<div class="col-sm-6 col-md-6">
-				<p>'.$item->name.'</p><p><span class="glyphicon glyphicon-yen">'.(($item->cost)/100).'</span>/'.
+				echo '<div class="col-sm-6 col-md-6">
+					<p>'.$item->name.'</p><p><span class="glyphicon glyphicon-yen">'.(($item->cost)/100).'</span>/'.
 					(($item->price == 0)?'<span class="glyphicon glyphicon-yen">'.(2.4*($item->cost)/100).'</span>'
 					:'<span class="glyphicon glyphicon-yen" style="color:#c00000;">'.($item->price).'</span>').
 				'<span class="text-danger" style="margin-left:8px;">数量: '.$item->quantity.$item->unit.'</span></p>
@@ -62,27 +74,16 @@
 				</p>
 			</div>';
 
-			//if($indextemp%2 == 0){
 			echo '</div>';
 			}
+
 			$name = $item->name;
 			$image = $item->image;
 			$cost = $item->cost;
 			$quantity = $item->quantity;
 
-			//}
-			
-/*
-			echo '<div class="media">
-  				<div class="media-left">
-    			<img class="media-object" src="'.$item->image.'" alt="..." style="width:64px;height:64px;">
-  				</div>
-  				<div class="media-body">
-    			<h4 class="media-heading">Media heading</h4>
-    			...
-  				</div>
-				</div>';
-*/
+			$analysis0 += $cost*$quantity/100;
+			$analysis1 += $quantity;
 
 /*
 			if($indextemp%3 == 0){
@@ -130,10 +131,12 @@
 		}
 
 		if($total != 0){
-					$total += $quantity;
-					echo '<span class="badge" style="background-color: #398439;">总数: '.$total.'</span><hr class="featurette-divider">';
-					$total = 0;
-				}
+			$total += $quantity;
+			echo '<span class="badge" style="background-color: #398439;">总数: '.$total.'</span><hr class="featurette-divider">';
+			$total = 0;
+		}
+
+		echo '<hr class="featurette-divider"><h3>订单合计: </h3><h5>总件数: '.$analysis1.'件</h5><h5>总金额: '.$analysis0.'元</h5>';
 ?>
 
 
