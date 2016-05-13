@@ -144,6 +144,84 @@ Class System extends Secure_area{
 		redirect('system/employee');
 	}
 	
+	function key()
+	{
+		$this->load->library('pagination');
+
+		$config['base_url'] = base_url().'index.php/system/key';
+		$this->db->where('delete !=',2);
+		$config['total_rows'] = $this->db->get('item_keys')->num_rows();
+		$config['per_page'] = 300;
+		$config['num_links'] = 20;
+		$config['full_tag_open'] = '<ul class="pagination" id="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = false;
+        $config['last_link'] = false;
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['prev_link'] = '&laquo';
+        $config['prev_tag_open'] = '<li class="prev">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '&raquo';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+
+
+		$this->pagination->initialize($config);
+		$this->db->where('delete !=',2);
+		$data['records'] = $this->db->get('item_keys', $config['per_page'], $this->uri->segment(3));
+		
+		$data['main_containt'] = 'system/key';
+		$this->load->view('includes/template',$data);
+	}
+
+function keyedit()
+{
+	if($this->input->post('ajax')=='1')
+	{
+		$success=false;
+		
+		$pieces = explode("_", $this->input->post('name'));
+			
+		if($pieces[0]=='key'){
+			$update_data = array(
+				'delete' => 1
+			);
+			$this->db->where('key_id',$pieces[1]);
+			$success = $this->db->update('item_keys',$update_data);
+			
+			if($success)
+			{
+				echo $pieces[0];
+			}
+			
+		}else if ($pieces[0]=='del'){
+			$update_data = array(
+				'delete' => 2
+			);
+			$this->db->where('key_id',$pieces[1]);
+			$success = $this->db->update('item_keys',$update_data);
+			
+			if($success)
+			{
+				echo $pieces[0];
+			}
+			
+		}
+		if($success)
+		{
+			echo '成功';
+		}
+			
+	}
+}
+
 	function item()
 	{
 		$this->load->library('pagination');
