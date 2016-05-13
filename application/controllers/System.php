@@ -151,7 +151,7 @@ Class System extends Secure_area{
 		$config['base_url'] = base_url().'index.php/system/key';
 		$this->db->where('delete !=',2);
 		$config['total_rows'] = $this->db->get('item_keys')->num_rows();
-		$config['per_page'] = 300;
+		$config['per_page'] = 600;
 		$config['num_links'] = 20;
 		$config['full_tag_open'] = '<ul class="pagination" id="pagination">';
 		$config['full_tag_close'] = '</ul>';
