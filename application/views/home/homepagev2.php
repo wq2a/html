@@ -1,6 +1,6 @@
 <?php $this->load->view('home/homev2');?>
 
-<h1>V2.0.2</h1>
+<h1>V2.0.5</h1>
 
 <hr class="featurette-divider">
 
