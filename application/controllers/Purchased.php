@@ -242,9 +242,14 @@
 	// 破损退货订单详细页
 	function returnorderdetail($order_id)
 	{
+		$sql = "update purchase_order_items P set item_id=(select item_id from items I where I.name=P.name limit 1) where order_id='".$order_id."'
+				 AND item_id=0";
+		$this->db->query($sql);
+
 		$this->db->select('*, purchase_order_items.image as image, purchase_order_items.cost as cost, purchase_order_items.quantity as quantity ');
 		$this->db->where('order_id',$order_id);
-		$this->db->join('items', 'purchase_order_items.name = items.name');
+		$this->db->join('items', 'purchase_order_items.item_id = items.item_id');
+		//$this->db->join('items', 'purchase_order_items.name = items.name');
 		
 		$data['query'] = $this->db->get('purchase_order_items');
 		
