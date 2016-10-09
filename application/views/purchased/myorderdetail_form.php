@@ -19,9 +19,9 @@
 			<img src="'.$item->image.'" class="img-thumbnail" style="border: 0 none;box-shadow: none;"/>
 			<h1 class="carousel-caption text-info" style="color:#000000;">#'.$indextemp.'</h1>
 			</div>
-			<p style="margin-bottom:2px;">'
+			<p style="margin-bottom:2px;"><a href="'.$item->link.'" target="_blank">'
 			.$item->name.
-			'</p>
+			'</a></p>
 			<p>'.$item->supplier.'</p><p style="margin:0px;"><span class="glyphicon glyphicon-yen">'.(($item->cost)/100).
 			'</p></div></div>';
 			

@@ -7,6 +7,9 @@
 		parent::__construct();
 		$data['navigation'] = get_class();
 		$data['key_words'] = $this->db->get('search_words');
+		$data['all_rows'] = $this->db->get('purchase_order')->num_rows();
+		$this->db->where('is_return',0);
+		$data['notchecked_rows'] = $this->db->get('purchase_order')->num_rows();
 		$this->load->vars($data);
 	}
 	
@@ -128,6 +131,43 @@
 		$this->load->view('includes/template',$data);
 	}
 
+	function notcheckedorder()
+	{
+		$this->load->library('pagination');
+
+		$config['base_url'] = base_url().'index.php/Purchased/notcheckedorder';
+		$this->db->where('is_return',0);
+		$config['total_rows'] = $this->db->get('purchase_order')->num_rows();
+		$config['per_page'] = 10;
+		$config['num_links'] = 8;
+		$config['full_tag_open'] = '<ul class="pagination" id="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = false;
+        	$config['last_link'] = false;
+        	$config['first_tag_open'] = '<li>';
+        	$config['first_tag_close'] = '</li>';
+        	$config['prev_link'] = '&laquo';
+        	$config['prev_tag_open'] = '<li class="prev">';
+        	$config['prev_tag_close'] = '</li>';
+        	$config['next_link'] = '&raquo';
+        	$config['next_tag_open'] = '<li>';
+        	$config['next_tag_close'] = '</li>';
+        	$config['last_tag_open'] = '<li>';
+        	$config['last_tag_close'] = '</li>';
+        	$config['cur_tag_open'] = '<li class="active"><a href="#">';
+        	$config['cur_tag_close'] = '</a></li>';
+        	$config['num_tag_open'] = '<li>';
+        	$config['num_tag_close'] = '</li>';
+		$this->pagination->initialize($config);
+		$this->db->where('is_return',0);
+		$this->db->order_by("createtime", "desc");
+		$data['records'] = $this->db->get('purchase_order', $config['per_page'], $this->uri->segment(3));
+		
+		$data['main_containt'] = 'purchased/allorder_form';
+		$data['pageTag'] = 'notchecked';
+		$this->load->view('includes/template',$data);
+	}
+
 	// 所有采购订单
 	function myorder()
 	{
@@ -158,10 +198,10 @@
         $config['num_tag_open'] = '<li>';
         $config['num_tag_close'] = '</li>';
 		$this->pagination->initialize($config);
+		
 		$this->db->where('deleted',0);
 		$this->db->order_by("createtime", "desc");
 		
-
 		$data['records'] = $this->db->get('myorder', $config['per_page'], $this->uri->segment(3));
 		
 		$data['main_containt'] = 'purchased/myorder_form';
@@ -216,8 +256,10 @@
 	// 采购单详细页
 	function myorderdetail($order_id)
 	{
-		$this->db->where('order_id',$order_id);
-		$data['query'] = $this->db->get('myorder_item');
+		$this->db->from('myorder_item');
+		$this->db->join('items','items.item_id=myorder_item.item_id');
+		$this->db->where('myorder_item.order_id',$order_id);
+		$data['query'] = $this->db->get();
 		$data['order_id'] = $order_id;
 		$data['pageTag'] = 'myorder';
 		$data['main_containt'] = 'purchased/myorderdetail_form';
@@ -687,6 +729,30 @@
 			}
 		}
 	}
+
+	function allsuppliers()
+	{
+		$sql = 'update purchase_order S set order_total=(select Sum((cost*quantity))/100 from purchase_order_items SI where SI.order_id=S.order_id) where order_total=0';
+		$data['records'] = $this->db->query($sql);
+
+		$sql = 'select supplier, Sum(order_total) total, Count(*) number, Avg(order_total) average from purchase_order group by supplier order by total DESC';
+		$data['records'] = $this->db->query($sql);
+		$data['main_containt'] = 'purchased/allsuppliers_form';
+		$data['pageTag'] = 'allsuppliers';
+		$this->load->view('includes/template',$data);
+	}
+
+	function calandar()
+	{
+		$month = date('m');
+		$sql = 'select * from purchase_order where createtime like \'____'.$month.'%\'';
+		$data['records'] = $this->db->query($sql);
+		$data['main_containt'] = 'purchased/calandar_form';
+		$data['pageTag'] = 'calandar';
+		$this->load->view('includes/template',$data);
+		
+	}
+
 }
 
 ?>

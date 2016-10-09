@@ -8,6 +8,7 @@
 			$this->db->from('myorder_item');
 			$this->db->where('myorder_item.order_id',$item->myorder_id);
 			$this->db->join('myorder', 'myorder.myorder_id = myorder_item.order_id');
+//			$this->db->join('items','myorder_item.item_id=items.item_id');
 			$this->db->limit(3);
 			$query = $this->db->get();
 			

@@ -10,6 +10,11 @@
     src: local("Jenna Sue"), url('../fonts/JennaSue-webfont.ttf'); 
 }
 
+/* customize badge background color*/
+.badge-danger {
+  background-color:#f89406 !important;
+}
+
 #logo { 
   width: auto;/*160px;*/
   float: left;
