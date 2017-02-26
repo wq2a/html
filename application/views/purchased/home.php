@@ -12,6 +12,7 @@
 <hr>
 <div class="list-group">
 <a href="#" onclick="jump('<?php echo base_url()?>index.php/purchased/purchaseitems')" value="搜索" class="list-group-item <?php if(isset($pageTag)&&$pageTag=='myorderitem')echo ' active';?>">采 货 系 统</a>
+<a href="#" onclick="jump('<?php echo base_url()?>index.php/purchased/buylistview')" value="搜索" class="list-group-item <?php if(isset($pageTag)&&$pageTag=='buylistview')echo ' active';?>">常 购 商 品 <span class="label label-info">新</span></a>
 <a href="#" onclick="jump('<?php echo base_url()?>index.php/purchased/myorder')" value="搜索" class="list-group-item <?php if(isset($pageTag)&&$pageTag=='myorder')echo ' active';?>">采 购 单</a>
 
 </div>
