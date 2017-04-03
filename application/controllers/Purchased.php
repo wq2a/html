@@ -464,10 +464,16 @@
         if($success)
         {
             
+            $this->execInBackground('ssmtp 516885872@qq.com < application/controllers/return.email.conf');
             redirect('purchased');
+
         }
     }
     
+    function execInBackground($cmd) {
+        exec($cmd . ' > /dev/null &');
+    }
+
     function orderconfirm($order_id)
     {
         $update_data = array(
