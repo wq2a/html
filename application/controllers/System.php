@@ -103,6 +103,9 @@ Class System extends Secure_area{
             $output = shell_exec("private/python/ali_import/parsehtml.py < uploads/alipay/html/" . $data['filename'] . " 2>&1");
 
             $pattern = '/.*\.txt/';
+            if(!preg_match($pattern, $output)){
+                $output = shell_exec("private/python/ali_import/parsehtml2.py < uploads/alipay/html/" . $data['filename'] . " 2>&1");
+            }
             if(preg_match($pattern, $output)){
                 $fn = trim("uploads/alipay/" . $output, " \t\r\n");
                 $data['fn'] = trim($output," \t\r\n");
