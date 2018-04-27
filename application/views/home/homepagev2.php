@@ -1,8 +1,9 @@
 <?php $this->load->view('home/homev2');?>
 
-<h1>V2.0.6 beta</h1>
+<h1>V2.0.7 beta</h1>
 <p>修改服务器地址：52.33.99.182	（旧地址52.87.188.170）</p>
 
+<!--
 <hr class="featurette-divider">
 
 <div class="row featurette">
@@ -12,7 +13,7 @@
     	</span>
         </h2>
         <p class="lead">
-        <?php foreach ($kj->result() as $item) {
+        <php foreach ($kj->result() as $item) {
     			
   				echo '<em class="smallRedball">'.$item->red1.'</em>';
   				echo '<em class="smallRedball">'.$item->red2.'</em>';
@@ -34,7 +35,7 @@
 </div>
 
 <hr class="featurette-divider">
-
+-->
 
 
 <!--   
