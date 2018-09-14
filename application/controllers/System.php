@@ -86,6 +86,7 @@ Class System extends Secure_area{
     {
         $config['upload_path'] = './uploads/alipay/html';
         $config['allowed_types'] = 'html';
+        $config['encrypt_name'] = TRUE;
 
         $this->load->library('upload', $config);
         $data['main_containt'] = 'system/import';
